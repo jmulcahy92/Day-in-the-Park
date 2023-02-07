@@ -61,15 +61,14 @@ var parksUrl =
   parkCode +
   "&api_key=" +
   parksKey;
+var weatherCode = "acad";  // placeholder (pulls data for Acadia)
 var weatherUrl = "https://api.weather.gov";
-var weatherCode = "38.8894,-77.0352"
-
 
 fetch(parksUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
-      weatherCode = "38.8894,-77.0352"
+      weatherCode = "acad"  // placeholder (pulls data for Acadia)
     });
   }
 });
