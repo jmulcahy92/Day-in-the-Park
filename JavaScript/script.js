@@ -5,7 +5,7 @@ var parksUrl =
   parkCode +
   "&api_key=" +
   parksKey;
-var weatherUrl = "https://api.weather.gov/points/";
+var weatherUrl = "https://api.weather.gov";
 var weatherCode = "38.8894,-77.0352"
 
 
@@ -13,7 +13,7 @@ fetch(parksUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
-      weatherCode = 
+      weatherCode = "38.8894,-77.0352"
     });
   }
 });
@@ -25,3 +25,7 @@ fetch(weatherUrl).then(function (response) {
     });
   }
 });
+function coordinate(x, y) {
+    this.x = x;
+    this.y = y;
+}
