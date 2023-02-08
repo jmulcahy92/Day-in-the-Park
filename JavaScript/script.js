@@ -80,7 +80,7 @@ fetch(weatherUrl).then(function (response) {
     });
   }
 });
-function coordinate(x, y) {
-    this.x = x;
-    this.y = y;
+// function coordinate(x, y) {
+//     this.x = x;
+//     this.y = y;
 }
