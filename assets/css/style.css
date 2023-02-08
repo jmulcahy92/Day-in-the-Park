@@ -1,0 +1,32 @@
+body {
+    /* background-image: ; */
+    background-color: rgb(129, 152, 129);
+}
+
+main {
+    width: 80%;
+    /* margin: 10vh auto;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 10px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#explore {
+height: 40px;
+width: auto;
+background-color: rgb(101, 133, 37);
+font-family: Arial, Helvetica, sans-serif;
+border-color: rgb(6, 45, 23);
+
+}
+
+.hero {
+
+}
+
+.dropdown {
+
+}
