@@ -1,0 +1,40 @@
+body {
+    background: lightgray;
+}
+
+main {
+    background: white;
+    width: 80%;
+    margin: 10vh auto;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 12px;
+    margin: 5px;
+    font-family: serif;
+    background: #00b1ff;
+    color: white;
+}
+
+.card h1 {
+    background: teal;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-bottom: 5px solid black;
+    border-radius: 12px 12px 0 0;
+}
+
+.card h4 {
+    margin-left: 5px;
+}
+
+
