@@ -55,14 +55,32 @@ var parksArray = [
 ];
 
 var parksKey = "KVZPIz8u4dvHQhj5wYQxDQUisHC1pnhaaCNJSTD9";
-var parkCode = "acad" // placeholder (pulls data for Acadia)
-var parksUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=" + parksKey;
+var parkCode = "acad"; // placeholder (pulls data for Acadia)
+var parksUrl =
+  "https://developer.nps.gov/api/v1/parks?parkCode=" +
+  parkCode +
+  "&api_key=" +
+  parksKey;
+var weatherCode = "acad";  // placeholder (pulls data for Acadia)
+var weatherUrl = "https://api.weather.gov";
 
-fetch(parksUrl)
-    .then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-            });
-        }
+fetch(parksUrl).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (data) {
+      console.log(data);
+      weatherCode = "acad"  // placeholder (pulls data for Acadia)
     });
+  }
+});
+
+fetch(weatherUrl).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (data) {
+      console.log(data);
+    });
+  }
+});
+// function coordinate(x, y) {
+//     this.x = x;
+//     this.y = y;
+}
