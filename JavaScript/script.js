@@ -61,8 +61,10 @@ var parksUrl =
   parkCode +
   "&api_key=" +
   parksKey;
-var weatherCode = "acad";  // placeholder (pulls data for Acadia)
-var weatherUrl = "https://api.weather.gov";
+var weatherCode = parksArray[5].latitude + "," + parksArray[5].longitude;  // placeholder (pulls data for Acadia)
+var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+parksArray[5].latitude+"&lon="+parksArray[5].longitude+"&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
+var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48.68414678&lon=-113.8009306&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
+
 
 fetch(parksUrl).then(function (response) {
   if (response.ok) {
@@ -80,7 +82,20 @@ fetch(weatherUrl).then(function (response) {
     });
   }
 });
+
+fetch(weatherFiveDayUrl).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (data) {
+      console.log(data);
+    });
+  }
+});
+
+
+
+
+
+
 // function coordinate(x, y) {
 //     this.x = x;
 //     this.y = y;
-}
