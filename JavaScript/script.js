@@ -69,8 +69,51 @@ var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48
 fetch(parksUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
-      console.log(data);
-      weatherCode = "acad"  // placeholder (pulls data for Acadia)
+        console.log(data);
+        var parkData = data.data[0]; // common path to all data we want
+
+        var parkName = parkData.fullName; // full name in a string
+        // create/append into header
+
+        var parkActivities = parkData.activities; // array of park activities
+        // loop over array and create/append elements for each (parkActivities[i].name) in left column
+
+        var parkImages = parkData.images; // array of park images with alt texts, captions, credits, titles, and urls
+        var randomImage = parkImages[Math.floor(Math.random()*parkImages.length)]; // random image from array
+        // create element for image, using randomImage.url for src and randomImage.altText for alt attribute
+        // append image element
+        // create/append caption + credit element
+
+        var parkDescription = parkData.description; // two-three sentence string describing park
+        // create/append dsecription element
+
+        var parkDirections = parkData.directionsInfo; // two-three sentence string describing route to park from nearby major cities
+        var parkDirectionsUrl = parkData.directionsUrl; // url to NPS website with further directions(?)
+        // create/append directions element(s)
+
+        var parkEntranceFees = parkData.entranceFees; // array of entrance fees (cost + description, i.e. vehicle type)
+        var parkEntrancePasses = parkData.entrancePasses; //array of entrance pass options (cost + description)
+        var parkFees = parkData.fees; //array of other fees (?)
+        // create/append fee information elements
+
+        var parkHours = parkData.operatingHours; // array with single object? description, exceptions(?), and standard hours object listing hours for every day of the week individually
+        // create/append element with general description of hours
+        // create/append "standard hours" info for every day of the week
+
+        var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
+        // create/append into weather column (right)
+
+        // footer: addresses, phone numbers, email addresses, url for official NPS park site
+
+        console.log(parkName);
+        console.log(parkActivities);
+        console.log(randomImage);
+        console.log(parkDescription);
+        console.log(parkDirections);
+        console.log(parkEntranceFees);
+        console.log(parkEntrancePasses);
+        console.log(parkHours);
+        console.log(parkClimate);
     });
   }
 });
@@ -99,3 +142,4 @@ fetch(weatherFiveDayUrl).then(function (response) {
 // function coordinate(x, y) {
 //     this.x = x;
 //     this.y = y;
+//}
