@@ -133,23 +133,53 @@ fetch(parksUrl).then(function (response) {
           mainFees.children[4].appendChild(newEntranceFeeEl);
         }
         
-        var parkHours = parkData.operatingHours; // array with single object? description, exceptions(?), and standard hours object listing hours for every day of the week individually
+        var parkHours = parkData.operatingHours; // array of objects with description, and standard hours object listing hours for every day of the week individually
         // create/append element with general description of hours
-        var newHoursDescriptionEl = document.createElement("p");
-        newHoursDescriptionEl.textContent = parkHours[0].description;
-        mainHours.appendChild(newHoursDescriptionEl);
-        // create/append "standard hours" info for every day of the week
-        var newHoursUl = document.createElement("ul");
-        var weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-        for (i = 0; i < 7; i++) {
-          eval("var dailyHours = parkHours[0].standardHours." + weekdays[i]);
-          var hoursString = weekdays[i] + ": " + dailyHours;
-          hoursString = hoursString.charAt(0).toUpperCase() + hoursString.slice(1);
-          var newHoursLi = document.createElement("li");
-          newHoursLi.textContent = hoursString;
-          newHoursUl.appendChild(newHoursLi);
+        for (i = 0; i < parkHours.length; i++) {
+          var newHoursTitleEl = document.createElement("h3");
+          newHoursTitleEl.textContent = parkHours[i].name;
+          mainHours.appendChild(newHoursTitleEl);
+
+          var newHoursDescriptionEl = document.createElement("p");
+          newHoursDescriptionEl.textContent = parkHours[i].description;
+          mainHours.appendChild(newHoursDescriptionEl);
+
+          // create/append "standard hours" info for every day of the week
+          var newHoursUl = document.createElement("ul");
+          var weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+          for (n = 0; n < 7; n++) {
+            eval("var dailyHours = parkHours[i].standardHours." + weekdays[n]);
+            var hoursString = weekdays[n] + ": " + dailyHours;
+            hoursString = hoursString.charAt(0).toUpperCase() + hoursString.slice(1);
+            var newHoursLi = document.createElement("li");
+            newHoursLi.textContent = hoursString;
+            newHoursUl.appendChild(newHoursLi);
+          }
+          mainHours.appendChild(newHoursUl);
+
+          if (parkHours[i].exceptions !== []) {
+            var yesExceptionsEl = document.createElement("h4");
+            yesExceptionsEl.textContent = "Exceptions:";
+            mainHours.appendChild(yesExceptionsEl);
+
+            for (x = 0; x < parkHours[i].exceptions.length; x++) {
+              var exceptionDates = document.createElement("h5");
+              exceptionDates.textContent = "Dates: " + parkHours[i].exceptions[x].startDate + "-" + parkHours[i].exceptions[x].endDate;
+              mainHours.appendChild(exceptionDates)
+            
+              var newExceptionsUl = document.createElement("ul");
+              for (n = 0; n < 7; n++) {
+                eval("var dailyExceptions = parkHours[i].exceptions[x].exceptionHours." + weekdays[n]);
+                var exceptionsString = weekdays[n] + ": " + dailyExceptions;
+                exceptionsString = exceptionsString.charAt(0).toUpperCase() + exceptionsString.slice(1);
+                var newExceptionsLi = document.createElement("li");
+                newExceptionsLi.textContent = exceptionsString;
+                newExceptionsUl.appendChild(newExceptionsLi);
+              }
+              mainHours.appendChild(newExceptionsUl);
+            }
+          }
         }
-        mainHours.appendChild(newHoursUl);
 
         var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
         // create/append into weather column (right)
