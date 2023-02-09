@@ -118,6 +118,20 @@ fetch(parksUrl).then(function (response) {
         // create/append into weather column (right)
 
         // footer: addresses, phone numbers, email addresses, url for official NPS park site
+        var parkAddress = parkData.Address;
+        // create/append park address
+        var parkPhone = parkData.PhoneNumber;
+        // create/append phone number
+        var parkEmail = parkData.parkEmail;
+        // create/append park email
+        var parkURL = parkData.url;
+        // create/append park website
+        
+
+        console.log(parkAddress);
+        console.log(parkPhone);
+        console.log(parkEmail);
+        console.log(parkURL);
 
         console.log(parkName);
         console.log(parkActivities);
@@ -149,11 +163,3 @@ fetch(weatherFiveDayUrl).then(function (response) {
 });
 
 
-
-
-
-
-// function coordinate(x, y) {
-//     this.x = x;
-//     this.y = y;
-//}
