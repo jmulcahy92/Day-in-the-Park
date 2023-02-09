@@ -64,9 +64,13 @@ var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + 
 var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48.68414678&lon=-113.8009306&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 
-var activitiesList = document.querySelector(".left").children[1];
+var headerEl = document.querySelector(".header");
+var activitiesList = document.querySelector(".left").children[0].children[1].children[1];
 var mainImage = document.querySelector("#park-image");
 var mainDescription = document.querySelector("#description");
+var mainDirections = document.querySelector("#getting-here");
+var mainFees = document.querySelector("#fees");
+var mainHours = document.querySelector("#hours");
 
 fetch(parksUrl).then(function (response) {
   if (response.ok) {
@@ -75,7 +79,9 @@ fetch(parksUrl).then(function (response) {
         var parkData = data.data[0]; // common path to all data we want
 
         var parkName = parkData.fullName; // full name in a string
-        // create/append into header
+        var titleEl = document.createElement("p");
+        titleEl.textContent = parkName;
+        headerEl.appendChild(titleEl);
 
         var parkActivities = parkData.activities; // array of park activities
         for (i = 0; i < parkActivities.length; i++) { // loop over parkActivites array...
@@ -86,33 +92,63 @@ fetch(parksUrl).then(function (response) {
 
         var parkImages = parkData.images; // array of park images with alt texts, captions, credits, titles, and urls
         var randomImage = parkImages[Math.floor(Math.random()*parkImages.length)]; // random image from array
-        var newImgEl = document.createElement("img");// create element for image, using randomImage.url for src and randomImage.altText for alt attribute
-        newImgEl.setAttribute("src", randomImage.url);
-        newImgEl.setAttribute("alt", randomImage.altText);
+        var newImgEl = document.createElement("img"); // create element for image, using randomImage.url for src and randomImage.altText for alt attribute
+        newImgEl.setAttribute("src", randomImage.url); // set image src as randomImage.url
+        newImgEl.setAttribute("alt", randomImage.altText); // set image alt as randomImage.altText
         mainImage.appendChild(newImgEl); // append image element
 
-        // create/append caption + credit element
-        var imgCaption = document.createElement("p");
-        imgCaption.textContent = randomImage.caption + " Credit: " + randomImage.credit;
-        mainImage.appendChild(imgCaption);
+        var imgCaption = document.createElement("p"); // create image caption element
+        imgCaption.textContent = randomImage.caption + " Credit: " + randomImage.credit; // set textContent with image description and credit
+        mainImage.appendChild(imgCaption); // append caption element
 
         var parkDescription = parkData.description; // two-three sentence string describing park
-        var newDescription = document.createElement("p"); // create description p element
-        newDescription.textContent = parkDescription; // set textContent
-        mainDescription.appendChild(newDescription); // append description element
+        var newDescriptionEl = document.createElement("p"); // create description p element
+        newDescriptionEl.textContent = parkDescription; // set textContent
+        mainDescription.appendChild(newDescriptionEl); // append description element
 
         var parkDirections = parkData.directionsInfo; // two-three sentence string describing route to park from nearby major cities
         var parkDirectionsUrl = parkData.directionsUrl; // url to NPS website with further directions(?)
-        // create/append directions element(s)
+        var newDirectionsEl = document.createElement("p"); // create directions p element
+        var newDirectionsUrlEl = document.createElement("a"); // create anchor element for link to directions
+        newDirectionsEl.textContent = parkDirections + ". Further info can be found "; // set textContent (including url)
+        newDirectionsUrlEl.setAttribute("href", parkDirectionsUrl); // set href of anchor to directions url
+        newDirectionsUrlEl.textContent = "here"; // set textContent of anchor
+        newDirectionsEl.appendChild(newDirectionsUrlEl); // append anchor to end of directions element
+        mainDirections.appendChild(newDirectionsEl); // append directions element
 
         var parkEntranceFees = parkData.entranceFees; // array of entrance fees (cost + description, i.e. vehicle type)
         var parkEntrancePasses = parkData.entrancePasses; //array of entrance pass options (cost + description)
-        var parkFees = parkData.fees; //array of other fees (?)
-        // create/append fee information elements
+        var parkFees = parkData.fees; //array of "other" fees
 
+        // loop over entrance fees array and display each in a list
+        for (i = 0; i < parkEntranceFees.length; i++) {
+          var newEntranceFeeEl = document.createElement("li");
+          newEntranceFeeEl.textContent = "$" + parkEntranceFees[i].cost + ": " + parkEntranceFees[i].description;
+          mainFees.children[2].appendChild(newEntranceFeeEl);
+        }
+
+        // loop over entrance passes array and display each in a list
+        for (i = 0; i < parkEntrancePasses.length; i++) {
+          var newEntranceFeeEl = document.createElement("li");
+          newEntranceFeeEl.textContent = "$" + parkEntrancePasses[i].cost + ": " + parkEntrancePasses[i].description;
+          mainFees.children[4].appendChild(newEntranceFeeEl);
+        }
+
+        // loop over "other" fees array and display each in a list
+        for (i = 0; i < parkFees.length; i++) {
+          var newEntranceFeeEl = document.createElement("li");
+          newEntranceFeeEl.textContent = "$" + parkFees[i].cost + ": " + parkFees[i].description;
+          mainFees.children[6].appendChild(newEntranceFeeEl);
+        } 
+        
         var parkHours = parkData.operatingHours; // array with single object? description, exceptions(?), and standard hours object listing hours for every day of the week individually
         // create/append element with general description of hours
+        var newHoursDescriptionEl = document.createElement("p");
+        newHoursDescriptionEl.textContent = parkHours[0].description;
+        mainHours.appendChild(newHoursDescriptionEl);
         // create/append "standard hours" info for every day of the week
+        var newHoursUl = document.createElement("ul");
+        
 
         var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
         // create/append into weather column (right)
