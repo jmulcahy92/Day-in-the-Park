@@ -1,6 +1,7 @@
 body {
     /* background-image: ; */
     background-color: rgb(129, 152, 129);
+    background-size: cover;
 }
 
 main {
@@ -23,10 +24,10 @@ border-color: rgb(6, 45, 23);
 
 }
 
-.hero {
+/* .hero {
 
 }
 
 .dropdown {
 
-}
+} */

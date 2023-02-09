@@ -61,7 +61,7 @@ var parksKey = "KVZPIz8u4dvHQhj5wYQxDQUisHC1pnhaaCNJSTD9"; // parks API key
 var parkCode = park.parkCode; // four-letter code for each park is necessary for our parks API call
 var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=" + parksKey; // URL for parks API fetch with park-specific parkCode query
 
-var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+park.latitude+"&lon="+park.longitude+"&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
+var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48.68414678&lon=-113.8009306&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 
 
@@ -75,7 +75,7 @@ fetch(parksUrl).then(function (response) {
         // create/append into header
 
         var parkActivities = parkData.activities; // array of park activities
-        // loop over array and create/append elements for each (parkActivities[i].name) in left column
+        // loop over array and create/append li elements for each (parkActivities[i].name) in left column
 
         var parkImages = parkData.images; // array of park images with alt texts, captions, credits, titles, and urls
         var randomImage = parkImages[Math.floor(Math.random()*parkImages.length)]; // random image from array
