@@ -64,6 +64,9 @@ var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + 
 var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48.68414678&lon=-113.8009306&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 
+var activitiesList = document.querySelector(".left").children[1];
+var mainImage = document.querySelector("#park-image");
+var mainDescription = document.querySelector("#description");
 
 fetch(parksUrl).then(function (response) {
   if (response.ok) {
@@ -75,16 +78,28 @@ fetch(parksUrl).then(function (response) {
         // create/append into header
 
         var parkActivities = parkData.activities; // array of park activities
-        // loop over array and create/append li elements for each (parkActivities[i].name) in left column
+        for (i = 0; i < parkActivities.length; i++) { // loop over parkActivites array...
+          var newLiEl = document.createElement("li"); // create a new li element
+          newLiEl.textContent = parkActivities[i].name; // put the activity in the new li element's textContent
+          activitiesList.appendChild(newLiEl); // append the new activity li element to the list of activities
+        }
 
         var parkImages = parkData.images; // array of park images with alt texts, captions, credits, titles, and urls
         var randomImage = parkImages[Math.floor(Math.random()*parkImages.length)]; // random image from array
-        // create element for image, using randomImage.url for src and randomImage.altText for alt attribute
-        // append image element
+        var newImgEl = document.createElement("img");// create element for image, using randomImage.url for src and randomImage.altText for alt attribute
+        newImgEl.setAttribute("src", randomImage.url);
+        newImgEl.setAttribute("alt", randomImage.altText);
+        mainImage.appendChild(newImgEl); // append image element
+
         // create/append caption + credit element
+        var imgCaption = document.createElement("p");
+        imgCaption.textContent = randomImage.caption + " Credit: " + randomImage.credit;
+        mainImage.appendChild(imgCaption);
 
         var parkDescription = parkData.description; // two-three sentence string describing park
-        // create/append dsecription element
+        var newDescription = document.createElement("p"); // create description p element
+        newDescription.textContent = parkDescription; // set textContent
+        mainDescription.appendChild(newDescription); // append description element
 
         var parkDirections = parkData.directionsInfo; // two-three sentence string describing route to park from nearby major cities
         var parkDirectionsUrl = parkData.directionsUrl; // url to NPS website with further directions(?)
