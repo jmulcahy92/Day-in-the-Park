@@ -1,53 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Day in the Park</title>
 </head>
+
 <body>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
+    <style>
+{
+<div class="leftcol">
+     <p>Whatever you want in your left column</p>
+    </div>
+    <div class=polaroid">
+       <p>October 29th, 2012<p>
+       <img src="images/today.jpg" width="1000" height="670" border="0" />
+    </div>
 }
+        * {
+            box-sizing: border-box;
+        }
+
+            {
+            <section class="vh-100" style="background-color: #C1CFEA;">
+                <div class="container py-5 h-100">
+                    <div class="container" id="currentForecast"></div>
+                    <div class="container" id="fiveDayForecast"></div>;
+        }
 
 
+        .column {
+            float: right;
+            width: 15.33%;
+            padding: 10px;
+            height: 900px;
+        }
 
-.column {
-  float: right;
-  width: 15.33%;
-  padding: 10px;
-  height: 900px;
-}
+        /* Clear floats after the column */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    </head>
 
-/* Clear floats after the column */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
-</head>
-<body>
+    <body>
 
 
-  <div class="column" style="background-color:#ccc;">
-    <h2> Weather Today</h2>
-    <p>At the Park</p>
-  </div>
-</div>
+        <div class="column" style="background-color:#436fcd;">
+            <h2> Weather Today</h2>
+            <p>At the Park</p>
+        </div>
+        </div>
 
-</body>
+    </body>
+
 </html>
 
-    <aside>
-        <div>
+<aside>
+    <div>
 
-        </div>
-    </aside>
+    </div>
+</aside>
 
-    <script src="./assets/JavaScript/script.js"></script>
+<script src="./assets/JavaScript/script.js"></script>
 </body>
+
 </html>
