@@ -1,6 +1,6 @@
 var backgroundPath = "./assets/images/backgrounds/"; // file path to background images
-var backgrounds = [backgroundPath + "acadia.jpg", backgroundPath + "glacier.jpg", backgroundPath + "grandcanyon.jpg", backgroundPath + "grandteton.jpg", backgroundPath + "greatsmokymountains.jpg", backgroundPath + "rockymountain.jpg", backgroundPath + "yellowstone.jpg", backgroundPath + "yosemite.jpg"]; // array of background image file pathways, one per park
-var randomBackground = backgrounds[Math.floor(Math.random()*backgrounds.length)]; // selects random background pathway
+var backgrounds = ["acadia.jpg", "glacier.jpg", "grandcanyon.jpg", "grandteton.jpg", "greatsmokymountains.jpg", "rockymountain.jpg", "yellowstone.jpg", "yosemite.jpg"]; // array of background image file names, one per park
+var randomBackground = backgroundPath + backgrounds[Math.floor(Math.random()*backgrounds.length)]; // selects random background pathway
 
 document.body.style.backgroundImage = "url(" + randomBackground + ")"; // sets body's backgroundImage
 
