@@ -83,12 +83,14 @@ fetch(parksUrl).then(function (response) {
         titleEl.textContent = parkName;
         headerEl.appendChild(titleEl);
 
+
         var parkActivities = parkData.activities; // array of park activities
         for (i = 0; i < parkActivities.length; i++) { // loop over parkActivites array...
           var newLiEl = document.createElement("li"); // create a new li element
           newLiEl.textContent = parkActivities[i].name; // put the activity in the new li element's textContent
           activitiesList.appendChild(newLiEl); // append the new activity li element to the list of activities
         }
+
 
         var parkImages = parkData.images; // array of park images with alt texts, captions, credits, titles, and urls
         var randomImage = parkImages[Math.floor(Math.random()*parkImages.length)]; // random image from array
@@ -101,20 +103,19 @@ fetch(parksUrl).then(function (response) {
         imgCaption.textContent = randomImage.caption + " Credit: " + randomImage.credit; // set textContent with image description and credit
         mainImage.appendChild(imgCaption); // append caption element
 
+
         var parkDescription = parkData.description; // two-three sentence string describing park
-        var newDescriptionEl = document.createElement("p"); // create description p element
-        newDescriptionEl.textContent = parkDescription; // set textContent
-        mainDescription.appendChild(newDescriptionEl); // append description element
+        mainDescription.textContent = parkDescription; // append description element
+
 
         var parkDirections = parkData.directionsInfo; // two-three sentence string describing route to park from nearby major cities
         var parkDirectionsUrl = parkData.directionsUrl; // url to NPS website with further directions(?)
-        var newDirectionsEl = document.createElement("p"); // create directions p element
         var newDirectionsUrlEl = document.createElement("a"); // create anchor element for link to directions
-        newDirectionsEl.textContent = parkDirections + ". Further info can be found "; // set textContent (including url)
+        mainDirections.textContent = parkDirections + ". Further info can be found "; // set textContent (including url)
         newDirectionsUrlEl.setAttribute("href", parkDirectionsUrl); // set href of anchor to directions url
-        newDirectionsUrlEl.textContent = "here"; // set textContent of anchor
-        newDirectionsEl.appendChild(newDirectionsUrlEl); // append anchor to end of directions element
-        mainDirections.appendChild(newDirectionsEl); // append directions element
+        newDirectionsUrlEl.textContent = "here."; // set textContent of anchor
+        mainDirections.appendChild(newDirectionsUrlEl); // append anchor to end of directions element
+
 
         var parkEntranceFees = parkData.entranceFees; // array of entrance fees (cost + description, i.e. vehicle type)
         var parkEntrancePasses = parkData.entrancePasses; //array of entrance pass options (cost + description)
@@ -130,26 +131,61 @@ fetch(parksUrl).then(function (response) {
         for (i = 0; i < parkEntrancePasses.length; i++) {
           var newEntranceFeeEl = document.createElement("li");
           newEntranceFeeEl.textContent = "$" + parkEntrancePasses[i].cost + ": " + parkEntrancePasses[i].description;
-          mainFees.children[4].appendChild(newEntranceFeeEl);
+          mainFees.children[5].appendChild(newEntranceFeeEl);
         }
         
-        var parkHours = parkData.operatingHours; // array with single object? description, exceptions(?), and standard hours object listing hours for every day of the week individually
+
+        var parkHours = parkData.operatingHours; // array of objects with description, and standard hours object listing hours for every day of the week individually
         // create/append element with general description of hours
-        var newHoursDescriptionEl = document.createElement("p");
-        newHoursDescriptionEl.textContent = parkHours[0].description;
-        mainHours.appendChild(newHoursDescriptionEl);
-        // create/append "standard hours" info for every day of the week
-        var newHoursUl = document.createElement("ul");
-        var weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-        for (i = 0; i < 7; i++) {
-          eval("var dailyHours = parkHours[0].standardHours." + weekdays[i]);
-          var hoursString = weekdays[i] + ": " + dailyHours;
-          hoursString = hoursString.charAt(0).toUpperCase() + hoursString.slice(1);
-          var newHoursLi = document.createElement("li");
-          newHoursLi.textContent = hoursString;
-          newHoursUl.appendChild(newHoursLi);
+        for (i = 0; i < parkHours.length; i++) {
+          var newHoursTitleEl = document.createElement("h3");
+          newHoursTitleEl.textContent = parkHours[i].name;
+          mainHours.appendChild(newHoursTitleEl);
+
+          var newHoursDescriptionEl = document.createElement("p");
+          newHoursDescriptionEl.textContent = parkHours[i].description;
+          mainHours.appendChild(newHoursDescriptionEl);
+
+          // create/append "standard hours" info for every day of the week
+          var newHoursUl = document.createElement("ul");
+          var weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+          for (n = 0; n < 7; n++) {
+            eval("var dailyHours = parkHours[i].standardHours." + weekdays[n]);
+            var hoursString = weekdays[n] + ": " + dailyHours;
+            hoursString = hoursString.charAt(0).toUpperCase() + hoursString.slice(1);
+            var newHoursLi = document.createElement("li");
+            newHoursLi.textContent = hoursString;
+            newHoursUl.appendChild(newHoursLi);
+          }
+          mainHours.appendChild(newHoursUl);
+
+          if (parkHours[i].exceptions.length != 0) {
+            var yesExceptionsEl = document.createElement("h4");
+            yesExceptionsEl.textContent = "Exceptions:";
+            mainHours.appendChild(yesExceptionsEl);
+
+            for (x = 0; x < parkHours[i].exceptions.length; x++) {
+              var exceptionDates = document.createElement("h5");
+              exceptionDates.textContent = "Dates: " + parkHours[i].exceptions[x].startDate + " to " + parkHours[i].exceptions[x].endDate;
+              mainHours.appendChild(exceptionDates)
+            
+              var newExceptionsUl = document.createElement("ul");
+              for (n = 0; n < 7; n++) {
+                eval("var dailyExceptions = parkHours[i].exceptions[x].exceptionHours." + weekdays[n]);
+                var exceptionsString = weekdays[n] + ": " + dailyExceptions;
+                exceptionsString = exceptionsString.charAt(0).toUpperCase() + exceptionsString.slice(1);
+                var newExceptionsLi = document.createElement("li");
+                newExceptionsLi.textContent = exceptionsString;
+                newExceptionsUl.appendChild(newExceptionsLi);
+              }
+              mainHours.appendChild(newExceptionsUl);
+            }
+          }
+
+          var breakEl = document.createElement("br");
+          mainHours.appendChild(breakEl);
         }
-        mainHours.appendChild(newHoursUl);
+
 
         var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
         // create/append into weather column (right)
