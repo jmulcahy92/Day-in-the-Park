@@ -1,92 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="./assets/css/test.css" />
+        <title> Day in the Park </title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./assets/css/test.css" />
-    <title> Day in the Park </title>
-    <div class="header">
-      <h1>Day in the Park</h1>
-      <p>National Parks of America</p>
-    </div>
-      </div>
-      </div>
-</head>
+    <body>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+        
+            /* Create three unequal columns that floats next to each other */
+            .column {
+                float: left;
+                padding: 10px;
+                height: 900px; /* Should be removed. Only for demonstration */
+            }
+        
+            .left, .right {
+                width: 20%;
+            }
+        
+            .middle {
+                width: 60%;
+            }
+        
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
 
-<body>
-
-   
-    <style>
-        * {
-          box-sizing: border-box;
-        }
-        
-        /* Create three unequal columns that floats next to each other */
-        .column {
-          float: left;
-          padding: 10px;
-          height: 900px; /* Should be removed. Only for demonstration */
-        }
-        
-        .left, .right {
-          width: 20%;
-        }
-        
-        .middle {
-          width: 60%;
-        }
-        
-        /* Clear floats after the columns */
-        .row:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
-
-        img {
-            max-width: 100%;
-            max-height: 30vh;
-        }
-    </style>
-        
+            img {
+                max-width: 100%;
+                max-height: 30vh;
+            }
+        </style>
+    
+        <div class="header">
+            <h1>Day in the Park</h1>
+            <p>National Parks of America</p>
+        </div>
         
         <div class="row">
-          <div class="column left" style="background-color:#aaa;">
-            <h2>Activities</h2>
-            <ul></ul>
-          </div>
-          <div class="column middle" style="background-color:#bbb;">
-            <h2>The Park</h2>
-            <div id="park-image"></div>
-            <div id="description">
-                <h3>Description</h3>
+            <div class="column left" style="background-color:#aaa;">
+                <h2>Activities</h2>
+                <ul></ul>
             </div>
-            <div id="getting-here">
-                <h3>Getting Here</h3>
+
+            <div class="column middle" style="background-color:#bbb;">
+                <h2>The Park</h2>
+                <div id="park-image"></div>
+                <div id="description">
+                    <h3>Description</h3>
+                </div>
+                <div id="getting-here">
+                    <h3>Getting Here</h3>
+                </div>
+                <div id="fees">
+                    <h3>Fees</h3>
+                    <p>Entry Fees:</p>
+                    <ul></ul>
+                    <p>Entry Passes:</p>
+                    <ul></ul>
+                    <p>Other Fees:</p>
+                    <ul></ul>
+                </div>
+                <div id="hours">
+                    <h3>Hours</h3>
+                </div>
             </div>
-            <div id="fees">
-                <h3>Fees</h3>
+        
+            <div class="column right" style="background-color:#ccc;">
+                <h2>Weather</h2>
+                <p>Today in the park its..</p>
             </div>
-            <div id="hours">
-                <h3>Hours</h3>
-            </div>
-          </div>
-          <div class="column right" style="background-color:#ccc;">
-            <h2>Weather</h2>
-            <p>Today in the park its..</p>
-          </div>
         </div>
         
         <section class="vh-100" style="background-color: #C1CFEA;">
-        <div class="container py-5 h-100">
-            <div class="container" id="currentForecast"></div>
-            <div class="container" id="fiveDayForecast"></div>
-        </div>
-        
-        <script src="./assets/JavaScript/script.js"></script>
-        
-        </body>
-        </html>
+            <div class="container py-5 h-100">
+                <div class="container" id="currentForecast"></div>
+                <div class="container" id="fiveDayForecast"></div>
+            </div>
+        </section>        
+    
+        <script src="./assets/JavaScript/script.js"></script>    
+    </body>
+</html>
         
