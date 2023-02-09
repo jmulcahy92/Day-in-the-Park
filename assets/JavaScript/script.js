@@ -148,7 +148,16 @@ fetch(parksUrl).then(function (response) {
         mainHours.appendChild(newHoursDescriptionEl);
         // create/append "standard hours" info for every day of the week
         var newHoursUl = document.createElement("ul");
-        
+        var weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        for (i = 0; i < 7; i++) {
+          eval("var dailyHours = parkHours[0].standardHours." + weekdays[i]);
+          var hoursString = weekdays[i] + ": " + dailyHours;
+          hoursString = hoursString.charAt(0).toUpperCase() + hoursString.slice(1);
+          var newHoursLi = document.createElement("li");
+          newHoursLi.textContent = hoursString;
+          newHoursUl.appendChild(newHoursLi);
+        }
+        mainHours.appendChild(newHoursUl);
 
         var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
         // create/append into weather column (right)
