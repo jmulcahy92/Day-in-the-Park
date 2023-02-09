@@ -5,68 +5,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="sheet" href="./assets/css/.css">
+    <section class="vh-100" style="background-color: #C1CFEA;">
+        <div class="container py-5 h-100">
+            <div class="container" id="currentForecast"></div>
+            <div class="container" id="fiveDayForecast"></div>
     <title>Day in the Park</title>
 </head>
 
 <body>
+
+   
     <style>
-{
-<div class="leftcol">
-     <p>Whatever you want in your left column</p>
-    </div>
-    <div class=polaroid">
-       <p>October 29th, 2012<p>
-       <img src="images/today.jpg" width="1000" height="670" border="0" />
-    </div>
-}
         * {
-            box-sizing: border-box;
+          box-sizing: border-box;
         }
-
-            {
-            <section class="vh-100" style="background-color: #C1CFEA;">
-                <div class="container py-5 h-100">
-                    <div class="container" id="currentForecast"></div>
-                    <div class="container" id="fiveDayForecast"></div>;
-        }
-
-
+        
+        /* Create three unequal columns that floats next to each other */
         .column {
-            float: right;
-            width: 15.33%;
-            padding: 10px;
-            height: 900px;
+          float: left;
+          padding: 10px;
+          height: 900px; /* Should be removed. Only for demonstration */
         }
-
-        /* Clear floats after the column */
+        
+        .left, .right {
+          width: 25%;
+        }
+        
+        .middle {
+          width: 50%;
+        }
+        
+        /* Clear floats after the columns */
         .row:after {
-            content: "";
-            display: table;
-            clear: both;
+          content: "";
+          display: table;
+          clear: both;
         }
-    </style>
-    </head>
-
-    <body>
-
-
-        <div class="column" style="background-color:#436fcd;">
-            <h2> Weather Today</h2>
-            <p>At the Park</p>
+        </style>
+        </head>
+        <body>
+        
+        <h2>Three Unequal Columns</h2>
+        
+        <div class="row">
+          <div class="column left" style="background-color:#aaa;">
+            <h2>Activities</h2>
+            <p>Some text..</p>
+          </div>
+          <div class="column middle" style="background-color:#bbb;">
+            <h2>The Park</h2>
+            <p>Some text..</p>
+          </div>
+          <div class="column right" style="background-color:#ccc;">
+            <h2>Weather</h2>
+            <p>Today in the park its..</p>
+          </div>
         </div>
-        </div>
-
-    </body>
-
-</html>
-
-<aside>
-    <div>
-
-    </div>
-</aside>
-
-<script src="./assets/JavaScript/script.js"></script>
-</body>
-
-</html>
+        
+        </body>
+        </html>
+        
