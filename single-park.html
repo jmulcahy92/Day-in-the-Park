@@ -38,6 +38,11 @@
           display: table;
           clear: both;
         }
+
+        img {
+            max-width: 100%;
+            max-height: 30vh;
+        }
     </style>
         
         
@@ -46,11 +51,23 @@
         <div class="row">
           <div class="column left" style="background-color:#aaa;">
             <h2>Activities</h2>
-            <p>Some text..</p>
+            <ul></ul>
           </div>
           <div class="column middle" style="background-color:#bbb;">
             <h2>The Park</h2>
-            <p>Some text..</p>
+            <div id="park-image"></div>
+            <div id="description">
+                <h3>Description</h3>
+            </div>
+            <div id="getting-here">
+                <h3>Getting Here</h3>
+            </div>
+            <div id="fees">
+                <h3>Fees</h3>
+            </div>
+            <div id="hours">
+                <h3>Hours</h3>
+            </div>
           </div>
           <div class="column right" style="background-color:#ccc;">
             <h2>Weather</h2>
