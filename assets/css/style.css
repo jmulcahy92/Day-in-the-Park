@@ -1,6 +1,5 @@
 body {
     text-align: center;
-    /* justify-content:  */
     background-size: cover;
 }
 
@@ -18,11 +17,13 @@ main {
 }
 
 #explore {
-height: 40px;
-width: auto;
+text-align: center;
+height: 60px;
+width: 200px;
 background-color: rgb(101, 133, 37);
+font-size: 20px;
 color: aliceblue;
-font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+font-family: 'Comfortaa', cursive;
 border-color: rgb(21, 49, 21);
 border-radius: 15px;
 margin-top: 5vh;
@@ -30,7 +31,11 @@ margin-top: 5vh;
 }
 
 .dropdown {
+text-align: center;
 border-color: rgba(88, 4, 4, 0.582);
 color:rgb(78, 102, 31);
 border-bottom: 50px;
+font-family: 'Comfortaa', cursive;
+color:rgba(88, 4, 4, 0.582)
+
 } 
