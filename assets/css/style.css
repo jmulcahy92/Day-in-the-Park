@@ -1,33 +1,36 @@
 body {
-    /* background-image: ; */
-    background-color: rgb(129, 152, 129);
+    text-align: center;
+    /* justify-content:  */
     background-size: cover;
 }
 
 main {
-    width: 80%;
+    margin-top: 400px;
+    /* width: auto;
     /* margin: 10vh auto;
     border: 2px solid black;
     border-radius: 12px;
     padding: 10px; */
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around; */
+
 }
 
 #explore {
 height: 40px;
 width: auto;
 background-color: rgb(101, 133, 37);
-font-family: Arial, Helvetica, sans-serif;
-border-color: rgb(6, 45, 23);
-
-}
-
-/* .hero {
+color: aliceblue;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+border-color: rgb(21, 49, 21);
+border-radius: 15px;
+margin-top: 5vh;
 
 }
 
 .dropdown {
-
-} */
+border-color: rgba(88, 4, 4, 0.582);
+color:rgb(78, 102, 31);
+border-bottom: 50px;
+} 
