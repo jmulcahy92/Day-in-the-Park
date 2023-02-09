@@ -62,7 +62,7 @@ var parkCode = park.parkCode; // four-letter code for each park is necessary for
 var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=" + parksKey; // URL for parks API fetch with park-specific parkCode query
 
 var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
-var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48.68414678&lon=-113.8009306&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
+var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 
 var headerEl = document.querySelector(".header");
 var activitiesList = document.querySelector(".left").children[0].children[1].children[1];
@@ -191,10 +191,19 @@ fetch(parksUrl).then(function (response) {
   }
 });
 
+var parkWeather = parkData.weatherInfo
+var parkFiveDayWeather = parkData.FiveDayWeatherInfo
+
 fetch(weatherUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
+      var parkData = data.main[0]; // common path to all data we want
+
+        var parkWeather = parkData.weather; // full name in a string
+        var titleEl = document.createElement("p");
+        titleEl.textContent = parkName;
+        headerEl.appendChild(titleEl);
     });
   }
 });
@@ -203,6 +212,12 @@ fetch(weatherFiveDayUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
+      var parkData = data.main[0]; // common path to all data we want
+
+        var parkFiveDayWeather = parkData.FiveDayWeather ; // full name in a string
+        var titleEl = document.createElement("p");
+        titleEl.textContent = parkName;
+        headerEl.appendChild(titleEl);
     });
   }
 });
