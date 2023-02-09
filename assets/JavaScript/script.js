@@ -118,7 +118,6 @@ fetch(parksUrl).then(function (response) {
 
         var parkEntranceFees = parkData.entranceFees; // array of entrance fees (cost + description, i.e. vehicle type)
         var parkEntrancePasses = parkData.entrancePasses; //array of entrance pass options (cost + description)
-        var parkFees = parkData.fees; //array of "other" fees
 
         // loop over entrance fees array and display each in a list
         for (i = 0; i < parkEntranceFees.length; i++) {
@@ -133,13 +132,6 @@ fetch(parksUrl).then(function (response) {
           newEntranceFeeEl.textContent = "$" + parkEntrancePasses[i].cost + ": " + parkEntrancePasses[i].description;
           mainFees.children[4].appendChild(newEntranceFeeEl);
         }
-
-        // loop over "other" fees array and display each in a list
-        for (i = 0; i < parkFees.length; i++) {
-          var newEntranceFeeEl = document.createElement("li");
-          newEntranceFeeEl.textContent = "$" + parkFees[i].cost + ": " + parkFees[i].description;
-          mainFees.children[6].appendChild(newEntranceFeeEl);
-        } 
         
         var parkHours = parkData.operatingHours; // array with single object? description, exceptions(?), and standard hours object listing hours for every day of the week individually
         // create/append element with general description of hours
@@ -172,21 +164,12 @@ fetch(parksUrl).then(function (response) {
         var parkURL = parkData.url;
         // create/append park website
         
+        console.log(parkClimate);
 
         console.log(parkAddress);
         console.log(parkPhone);
         console.log(parkEmail);
         console.log(parkURL);
-
-        console.log(parkName);
-        console.log(parkActivities);
-        console.log(randomImage);
-        console.log(parkDescription);
-        console.log(parkDirections);
-        console.log(parkEntranceFees);
-        console.log(parkEntrancePasses);
-        console.log(parkHours);
-        console.log(parkClimate);
     });
   }
 });
