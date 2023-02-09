@@ -65,7 +65,7 @@ var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.l
 var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48.68414678&lon=-113.8009306&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 
 var headerEl = document.querySelector(".header");
-var activitiesList = document.querySelector(".left").children[1];
+var activitiesList = document.querySelector(".left").children[0].children[1].children[1];
 var mainImage = document.querySelector("#park-image");
 var mainDescription = document.querySelector("#description");
 var mainDirections = document.querySelector("#getting-here");
