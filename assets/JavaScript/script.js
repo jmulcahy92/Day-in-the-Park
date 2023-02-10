@@ -268,17 +268,21 @@ function renderForecastList(data){
   var feelsLike = data.main.feels_like;
   var humidity = data.main.humidity;
   var windSpeed = data.wind.speed;
-  
+  var daytime = data.dt_txt;
+
   var listContainerEl = document.createElement("ul");
   var listItemOne = document.createElement("li");
   var listItemTwo = document.createElement("li");
   var listItemThree = document.createElement("li");
   var listItemFour = document.createElement("li");
+  var listItemZero = document.createElement("li");
+  listItemZero.textContent = daytime;
   listItemOne.textContent = "Temp: " + temp + "°F";
   listItemTwo.textContent = "Feels Like: " + feelsLike + "°F";
   listItemThree.textContent = "Humidity: " + humidity + "%";
   listItemFour.textContent = "Wind Speed: " + windSpeed + "MPH";
   listContainerEl.setAttribute("class", "mb-3");
+  listContainerEl.appendChild(listItemZero);
   listContainerEl.appendChild(listItemOne);
   listContainerEl.appendChild(listItemTwo);
   listContainerEl.appendChild(listItemThree);
