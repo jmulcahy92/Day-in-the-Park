@@ -191,13 +191,24 @@ fetch(parksUrl).then(function (response) {
         // create/append into weather column (right)
 
         // footer: addresses, phone numbers, email addresses, url for official NPS park site
-        var parkAddress = parkData.Address;
-        // create/append park address
-        var parkPhone = parkData.PhoneNumber;
+        var parkAddress = parkData.addresses;
+        var addressEl = document.querySelector(".footerLinks").children[3];
+        addressEl.textContent ="Address: "+parkAddress[0].line1+", "+parkAddress[0].line2+", "+parkAddress[0].city+", "+parkAddress[0].stateCode+" "+parkAddress[0].postalCode;
+
+        // create/append park address[]
+        var parkPhone = parkData.contacts.phoneNumbers;
+        var phoneEl = document.querySelector(".footerLinks").children[2];
+        phoneEl.textContent="Phone: "+parkPhone[0].phoneNumber
+
         // create/append phone number
-        var parkEmail = parkData.parkEmail;
+        var parkEmail = parkData.contacts.emailAddresses;
+        var emailEl = document.querySelector(".footerLinks").children[1];
+        emailEl.textContent="Email: "+parkEmail[0].emailAddress
+
         // create/append park email
         var parkURL = parkData.url;
+        var urlEl = document.querySelector(".footerLinks").children[0].children[0];
+        urlEl.setAttribute("href", parkURL)
         // create/append park website
         
         console.log(parkClimate);
