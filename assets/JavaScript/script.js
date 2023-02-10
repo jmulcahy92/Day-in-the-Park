@@ -323,7 +323,6 @@ function renderForecastList(data){
 fetch(weatherFiveDayUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
-      console.log(data);
       var forecastData = data.list; // common path to all data we want
 
       for (let index = 4; index < forecastData.length; index+=8) {
