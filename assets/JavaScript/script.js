@@ -68,6 +68,7 @@ var headerEl = document.querySelector(".header");
 var activitiesList = document.querySelector(".left").children[0].children[1].children[1];
 var mainImage = document.querySelector("#park-image");
 var mainDescription = document.querySelector("#description");
+var mainClimate = document.querySelector("#climate");
 var mainDirections = document.querySelector("#getting-here");
 var mainFees = document.querySelector("#fees");
 var mainHours = document.querySelector("#hours");
@@ -75,7 +76,6 @@ var mainHours = document.querySelector("#hours");
 fetch(parksUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
-        console.log(data);
         var parkData = data.data[0]; // common path to all data we want
 
         var parkName = parkData.fullName; // full name in a string
@@ -100,12 +100,12 @@ fetch(parksUrl).then(function (response) {
         mainImage.appendChild(newImgEl); // append image element
 
         var imgCaption = document.createElement("p"); // create image caption element
-        imgCaption.textContent = randomImage.caption + " Credit: " + randomImage.credit; // set textContent with image description and credit
+        imgCaption.textContent = randomImage.caption + " (Credit: " + randomImage.credit + ")"; // set textContent with image description and credit
         mainImage.appendChild(imgCaption); // append caption element
 
 
         var parkDescription = parkData.description; // two-three sentence string describing park
-        mainDescription.textContent = parkDescription; // append description element
+        mainDescription.textContent = parkDescription + " For a list of activities available in the park, simply look to the left side of your screen!"; // append description element
 
 
         var parkDirections = parkData.directionsInfo; // two-three sentence string describing route to park from nearby major cities
@@ -115,6 +115,10 @@ fetch(parksUrl).then(function (response) {
         newDirectionsUrlEl.setAttribute("href", parkDirectionsUrl); // set href of anchor to directions url
         newDirectionsUrlEl.textContent = "here."; // set textContent of anchor
         mainDirections.appendChild(newDirectionsUrlEl); // append anchor to end of directions element
+
+
+        var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
+        mainClimate.textContent = parkClimate + " Up to date weather information is available from the weather widget on the right side of your screen.";
 
 
         var parkEntranceFees = parkData.entranceFees; // array of entrance fees (cost + description, i.e. vehicle type)
@@ -159,35 +163,32 @@ fetch(parksUrl).then(function (response) {
           }
           mainHours.appendChild(newHoursUl);
 
-          if (parkHours[i].exceptions.length != 0) {
-            var yesExceptionsEl = document.createElement("h4");
-            yesExceptionsEl.textContent = "Exceptions:";
-            mainHours.appendChild(yesExceptionsEl);
+          // if (parkHours[i].exceptions.length != 0) {
+          //   var yesExceptionsEl = document.createElement("h4");
+          //   yesExceptionsEl.textContent = "Exceptions:";
+          //   mainHours.appendChild(yesExceptionsEl);
 
-            for (x = 0; x < parkHours[i].exceptions.length; x++) {
-              var exceptionDates = document.createElement("h5");
-              exceptionDates.textContent = "Dates: " + parkHours[i].exceptions[x].startDate + " to " + parkHours[i].exceptions[x].endDate;
-              mainHours.appendChild(exceptionDates)
+          //   for (x = 0; x < parkHours[i].exceptions.length; x++) {
+          //     var exceptionDates = document.createElement("h5");
+          //     exceptionDates.textContent = "Dates: " + parkHours[i].exceptions[x].startDate + " to " + parkHours[i].exceptions[x].endDate;
+          //     mainHours.appendChild(exceptionDates)
             
-              var newExceptionsUl = document.createElement("ul");
-              for (n = 0; n < 7; n++) {
-                eval("var dailyExceptions = parkHours[i].exceptions[x].exceptionHours." + weekdays[n]);
-                var exceptionsString = weekdays[n] + ": " + dailyExceptions;
-                exceptionsString = exceptionsString.charAt(0).toUpperCase() + exceptionsString.slice(1);
-                var newExceptionsLi = document.createElement("li");
-                newExceptionsLi.textContent = exceptionsString;
-                newExceptionsUl.appendChild(newExceptionsLi);
-              }
-              mainHours.appendChild(newExceptionsUl);
-            }
-          }
+          //     var newExceptionsUl = document.createElement("ul");
+          //     for (n = 0; n < 7; n++) {
+          //       eval("var dailyExceptions = parkHours[i].exceptions[x].exceptionHours." + weekdays[n]);
+          //       var exceptionsString = weekdays[n] + ": " + dailyExceptions;
+          //       exceptionsString = exceptionsString.charAt(0).toUpperCase() + exceptionsString.slice(1);
+          //       var newExceptionsLi = document.createElement("li");
+          //       newExceptionsLi.textContent = exceptionsString;
+          //       newExceptionsUl.appendChild(newExceptionsLi);
+          //     }
+          //     mainHours.appendChild(newExceptionsUl);
+          //   }
+          // }
 
           var breakEl = document.createElement("br");
           mainHours.appendChild(breakEl);
         }
-
-        var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
-        // create/append into weather column (right)
 
         // footer: addresses, phone numbers, email addresses, url for official NPS park site
         var parkAddress = parkData.addresses;
@@ -205,8 +206,6 @@ fetch(parksUrl).then(function (response) {
         var parkURL = parkData.url;
         var urlEl = document.querySelector(".footerLinks").children[0].children[0];
         urlEl.setAttribute("href", parkURL)
-        
-        console.log(parkClimate);
     });
   }
 });
