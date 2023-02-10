@@ -174,19 +174,17 @@ fetch(parksUrl).then(function (response) {
   }
 });
 
-var parkWeather = parkData.weatherInfo
-var parkFiveDayWeather = parkData.FiveDayWeatherInfo
+//var parkWeather = parkData.weatherInfo
+//var parkFiveDayWeather = parkData.FiveDayWeatherInfo
 
 fetch(weatherUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
-      var parkData = data.main[0]; // common path to all data we want
-
-        var parkWeather = parkData.weather; // full name in a string
-        var titleEl = document.createElement("p");
-        titleEl.textContent = parkName;
-        headerEl.appendChild(titleEl);
+      
+        var parkTemp = data.main.temp; 
+        var tempEl = document.querySelector("#current-weather").children[0];
+        tempEl.textContent = parkTemp;
     });
   }
 });
@@ -195,7 +193,7 @@ fetch(weatherFiveDayUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
-      var parkData = data.main[0]; // common path to all data we want
+      var parkData = data.main; // common path to all data we want
 
         var parkFiveDayWeather = parkData.FiveDayWeather ; // full name in a string
         var titleEl = document.createElement("p");
