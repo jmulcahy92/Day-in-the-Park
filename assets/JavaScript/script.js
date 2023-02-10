@@ -61,8 +61,8 @@ var parksKey = "KVZPIz8u4dvHQhj5wYQxDQUisHC1pnhaaCNJSTD9"; // parks API key
 var parkCode = park.parkCode; // four-letter code for each park is necessary for our parks API call
 var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=" + parksKey; // URL for parks API fetch with park-specific parkCode query
 
-var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
-var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
+var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; //calls the open weather API for todays weather
+var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; //calls the open weather API for a five day forecast
 
 var headerEl = document.querySelector(".header");
 var activitiesList = document.querySelector("#activities");
@@ -202,20 +202,20 @@ fetch(parksUrl).then(function (response) {
           mainHours.appendChild(breakEl);
         }
 
-        // footer: addresses, phone numbers, email addresses, url for official NPS park site
-        var parkAddress = parkData.addresses;
+        // footer: addresses, phone numbers, email addresses, and url for official NPS park site
+        var parkAddress = parkData.addresses;  //displays the physical address of each park
         var addressEl = document.querySelector(".footerLinks").children[3];
         addressEl.textContent ="Address: "+parkAddress[0].line1+", "+parkAddress[0].line2+", "+parkAddress[0].city+", "+parkAddress[0].stateCode+" "+parkAddress[0].postalCode;
 
-        var parkPhone = parkData.contacts.phoneNumbers;
+        var parkPhone = parkData.contacts.phoneNumbers;  //displays the phone number of each park
         var phoneEl = document.querySelector(".footerLinks").children[2];
         phoneEl.textContent="Phone: "+parkPhone[0].phoneNumber
 
-        var parkEmail = parkData.contacts.emailAddresses;
+        var parkEmail = parkData.contacts.emailAddresses;  //displays the email address of each park
         var emailEl = document.querySelector(".footerLinks").children[1];
         emailEl.textContent="Email: "+parkEmail[0].emailAddress
 
-        var parkURL = parkData.url;
+        var parkURL = parkData.url;  //displays the website of each park
         var urlEl = document.querySelector(".footerLinks").children[0].children[0];
         urlEl.setAttribute("href", parkURL)
     });
@@ -225,38 +225,38 @@ fetch(parksUrl).then(function (response) {
 //var parkWeather = parkData.weatherInfo
 //var parkFiveDayWeather = parkData.FiveDayWeatherInfo
 
-fetch(weatherUrl).then(function (response) {
+fetch(weatherUrl).then(function (response) {  //gets the weather for today
   if (response.ok) {
     response.json().then(function (data) {
-      var parkTemp = data.main.temp; 
+      var parkTemp = data.main.temp; // displays the current temperature for today
       var tempEl = document.querySelector("#current-weather").children[0];
       tempEl.textContent = "Temperature: "+ parkTemp + "°F";
         
-      var parkFeels_like = data.main.feels_like
+      var parkFeels_like = data.main.feels_like  //displays the current feels like temperature
       var feelsEl = document.querySelector("#current-weather").children[1];
       feelsEl.textContent = "Feels Like: "+ parkFeels_like + "°F"
         
-      var parkTemp_min = data.main.temp_min
+      var parkTemp_min = data.main.temp_min  //displays the minimum temperature for today
       var temp_minEl = document.querySelector("#current-weather").children[2];
       temp_minEl.textContent = "Low: "+ parkTemp_min + "°F"
         
-      var parkTemp_max = data.main.temp_max
+      var parkTemp_max = data.main.temp_max   //displays the maximum temperature for today
       var temp_maxEl = document.querySelector("#current-weather").children[3];
       temp_maxEl.textContent = "High: "+ parkTemp_max + "°F"
         
-      var weather = data.weather[0].main
+      var weather = data.weather[0].main   //displays the current weather conditions for today
       var weatherEl = document.querySelector("#current-weather").children[4];
       weatherEl.textContent = "Current weather: "+ weather
         
       var weatherID = data.weather[0].id
       var recommendationEl = document.querySelector("#current-weather").children[5];
-      if(weatherID <600){
+      if(weatherID <600){  //If it is raining 'bring an umbrella'
         recommendationEl.textContent = "Bring an umbrella"
-      } else if (weatherID <700){
+      } else if (weatherID <700){ //If it is snowing 'wear snow boots''
         recommendationEl.textContent = "Wear snow boots" 
-      } else if (weatherID ==800){
+      } else if (weatherID ==800){  //If it is clear 'wear sunscreen'
         recommendationEl.textContent = "Wear sunscreen"
-      } else if (weatherID ==711){
+      } else if (weatherID ==711){  //If there are dangerous conditions 'stay away'
         recommendationEl.textContent = "Stay away!"
       } else if (weatherID ==731){
         recommendationEl.textContent = "Stay away!"
@@ -270,7 +270,7 @@ fetch(weatherUrl).then(function (response) {
         recommendationEl.textContent = "Stay away!"
       } else if (weatherID ==781){
         recommendationEl.textContent = "Stay away!"
-      } else if (weatherID ==741){
+      } else if (weatherID ==741){   //If it is foggy, a warning that visibilty is poor
         recommendationEl.textContent = "visibility is poor"
       } else{
         recommendationEl.textContent = ""
@@ -280,11 +280,11 @@ fetch(weatherUrl).then(function (response) {
 });
 
 function renderForecastList(data){
-  var temp = data.main.temp;
-  var feelsLike = data.main.feels_like;
-  var humidity = data.main.humidity;
-  var windSpeed = data.wind.speed;
-  var daytime = data.dt_txt;
+  var temp = data.main.temp;  //gets the temperature for each day of the five day forecast
+  var feelsLike = data.main.feels_like; //gets the feels like temperature for each day of the five day forecast
+  var humidity = data.main.humidity; //gets the humidity for each day of the five day forecast
+  var windSpeed = data.wind.speed; //gets the windspeed for each day of the five day forecast
+  var daytime = data.dt_txt; //sets the date for each day of the five day forecast
 
   var listContainerEl = document.createElement("ul");
   var listItemOne = document.createElement("li");
@@ -292,11 +292,11 @@ function renderForecastList(data){
   var listItemThree = document.createElement("li");
   var listItemFour = document.createElement("li");
   var listItemZero = document.createElement("li");
-  listItemZero.textContent = daytime;
-  listItemOne.textContent = "Temp: " + temp + "°F";
-  listItemTwo.textContent = "Feels Like: " + feelsLike + "°F";
-  listItemThree.textContent = "Humidity: " + humidity + "%";
-  listItemFour.textContent = "Wind Speed: " + windSpeed + "MPH";
+  listItemZero.textContent = daytime;  //displays the time of day
+  listItemOne.textContent = "Temp: " + temp + "°F"; //displays the temperature for each day of the five day forecast
+  listItemTwo.textContent = "Feels Like: " + feelsLike + "°F";  //displays the feels like temperature for each day of the five day forecast
+  listItemThree.textContent = "Humidity: " + humidity + "%";  //displays the humidity for each day of the five day forecast
+  listItemFour.textContent = "Wind Speed: " + windSpeed + "MPH";  //displays the wind speed for each day of the five day forecast
   listContainerEl.setAttribute("class", "mb-3");
   listContainerEl.appendChild(listItemZero);
   listContainerEl.appendChild(listItemOne);
