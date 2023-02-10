@@ -38,7 +38,10 @@ Public.
 N/A
 
 ## Features
-LOOK INTO WHAT THIS MEANS
+- mobile-first courtesy of Tailwind CSS
+- responsive UI
+- 
+
 
 
 <br> 
