@@ -98,9 +98,9 @@ fetch(parksUrl).then(function (response) {
           newLiEl.appendChild(newLabel);
           activitiesList.appendChild(newLiEl); // append the new activity li element to the list of activities
 
-          // if (localStorage.length > 0) {
-          //   console.log(parkActivities[i].name);
-          // }
+          if (localStorage.getItem(parkActivities[i].name) !== null && localStorage.getItem(parkActivities[i].name) === "true") {
+            
+          }
         }
 
 
@@ -332,9 +332,11 @@ function saveActivities() {
   for (i = 0; i < boxes.length; i++) {
     var checkbox = document.getElementById("activity" + i);
     var activityName = checkbox.nextElementSibling.textContent;
-    localStorage.setItem(activityName, checkbox.checked);
+    window.localStorage.setItem(activityName, checkbox.checked.toString());
     // console.log(activityName + ": " + localStorage.getItem(activityName));
   }
+
+  // console.log(localStorage.getItem("Astronomy"));
 }
 
 activitiesList.addEventListener("change", saveActivities);
