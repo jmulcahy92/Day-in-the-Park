@@ -57,6 +57,10 @@ var parksArray = [
 var queryVar = location.search.split("=")[1]; // what park did the user ask for on the previous page?
 eval("var park = " + queryVar); // store user's chosen park's info in a new object called "park"
 
+if(park == null) {
+  location.href="./index.html";
+}
+
 var parksKey = "KVZPIz8u4dvHQhj5wYQxDQUisHC1pnhaaCNJSTD9"; // parks API key
 var parkCode = park.parkCode; // four-letter code for each park is necessary for our parks API call
 var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=" + parksKey; // URL for parks API fetch with park-specific parkCode query
