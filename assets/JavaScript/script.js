@@ -98,7 +98,7 @@ fetch(parksUrl).then(function (response) {
           var newCheckbox = document.createElement("input"); // create an input element
           newCheckbox.setAttribute("type", "checkbox"); // mark input as a checkbox
           newCheckbox.setAttribute("id", "activity" + i); // give it a unique id
-          newCheckbox.setAttribute("class", "box"); // give it class "box" for localStorage save function (see lines 352+)
+          newCheckbox.setAttribute("class", "box"); // give it class "box" for localStorage save function (see lines 335+)
           var newLabel = document.createElement("label"); // create a label element
           newLabel.setAttribute("for", "activity" + i); // mark it as corresponding to newCheckbox 
           newLabel.textContent = parkActivities[i].name; // put the activity in the new li element's textContent
