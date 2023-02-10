@@ -72,7 +72,7 @@ var mainClimate = document.querySelector("#climate");
 var mainDirections = document.querySelector("#getting-here");
 var mainFees = document.querySelector("#fees");
 var mainHours = document.querySelector("#hours");
-
+var forecastContainerEl = document.getElementById("forecast-container");
 fetch(parksUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
@@ -263,13 +263,39 @@ fetch(weatherUrl).then(function (response) {
   }
 });
 
+function renderForecastList(data){
+  var temp = data.main.temp;
+  var feelsLike = data.main.feels_like;
+  var humidity = data.main.humidity;
+  var windSpeed = data.wind.speed;
+  
+  var listContainerEl = document.createElement("ul");
+  var listItemOne = document.createElement("li");
+  var listItemTwo = document.createElement("li");
+  var listItemThree = document.createElement("li");
+  var listItemFour = document.createElement("li");
+  listItemOne.textContent = "Temp: " + temp + "°F";
+  listItemTwo.textContent = "Feels Like: " + feelsLike + "°F";
+  listItemThree.textContent = "Humidity: " + humidity + "%";
+  listItemFour.textContent = "Wind Speed: " + windSpeed + "MPH";
+  listContainerEl.setAttribute("class", "mb-3");
+  listContainerEl.appendChild(listItemOne);
+  listContainerEl.appendChild(listItemTwo);
+  listContainerEl.appendChild(listItemThree);
+  listContainerEl.appendChild(listItemFour);
+  forecastContainerEl.append(listContainerEl);
+
+}
+
 fetch(weatherFiveDayUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
       var forecastData = data.list; // common path to all data we want
-
-      for (let index = 7; index < forecastData.length; index+=8) {
+      var dayOneList = document.querySelector("#dayone-weather")
+      for (let index = 4; index < forecastData.length; index+=8) {
+        //console.log(data.list[index].main.temp);
+        renderForecastList(data.list[index])
         // var specificforecast = forecastData[index];
         // var parkTemp = specificforecast.main.temp; 
         // var tempEl = document.querySelector("#current-weather").children[0];
