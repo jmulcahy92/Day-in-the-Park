@@ -65,7 +65,7 @@ var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.l
 var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 
 var headerEl = document.querySelector(".header");
-var activitiesList = document.querySelector(".left").children[0].children[1].children[1];
+var activitiesList = document.querySelector("#activities");
 var mainImage = document.querySelector("#park-image");
 var mainDescription = document.querySelector("#description");
 var mainClimate = document.querySelector("#climate");
@@ -87,8 +87,20 @@ fetch(parksUrl).then(function (response) {
         var parkActivities = parkData.activities; // array of park activities
         for (i = 0; i < parkActivities.length; i++) { // loop over parkActivites array...
           var newLiEl = document.createElement("li"); // create a new li element
-          newLiEl.textContent = parkActivities[i].name; // put the activity in the new li element's textContent
+          var newCheckbox = document.createElement("input");
+          newCheckbox.setAttribute("type", "checkbox");
+          newCheckbox.setAttribute("id", "activity" + i);
+          newCheckbox.setAttribute("class", "box");
+          var newLabel = document.createElement("label");
+          newLabel.setAttribute("for", "activity" + i);
+          newLabel.textContent = parkActivities[i].name; // put the activity in the new li element's textContent
+          newLiEl.appendChild(newCheckbox);
+          newLiEl.appendChild(newLabel);
           activitiesList.appendChild(newLiEl); // append the new activity li element to the list of activities
+
+          if (localStorage.getItem(parkActivities[i].name) !== null && localStorage.getItem(parkActivities[i].name) === "true") {
+            newCheckbox.checked = true;
+          }
         }
 
 
@@ -111,7 +123,7 @@ fetch(parksUrl).then(function (response) {
         var parkDirections = parkData.directionsInfo; // two-three sentence string describing route to park from nearby major cities
         var parkDirectionsUrl = parkData.directionsUrl; // url to NPS website with further directions(?)
         var newDirectionsUrlEl = document.createElement("a"); // create anchor element for link to directions
-        mainDirections.textContent = parkDirections + ". Further info can be found "; // set textContent (including url)
+        mainDirections.textContent = parkDirections + " Further info can be found "; // set textContent (including url)
         newDirectionsUrlEl.setAttribute("href", parkDirectionsUrl); // set href of anchor to directions url
         newDirectionsUrlEl.textContent = "here."; // set textContent of anchor
         mainDirections.appendChild(newDirectionsUrlEl); // append anchor to end of directions element
@@ -330,4 +342,17 @@ fetch(weatherFiveDayUrl).then(function (response) {
   }
 });
 
+var boxes = document.getElementsByClassName("box");
 
+function saveActivities() {
+  for (i = 0; i < boxes.length; i++) {
+    var checkbox = document.getElementById("activity" + i);
+    var activityName = checkbox.nextElementSibling.textContent;
+    window.localStorage.setItem(activityName, checkbox.checked.toString());
+    // console.log(activityName + ": " + localStorage.getItem(activityName));
+  }
+
+  // console.log(localStorage.getItem("Astronomy"));
+}
+
+activitiesList.addEventListener("change", saveActivities);
