@@ -244,6 +244,22 @@ fetch(weatherUrl).then(function (response) {
         recommendationEl.textContent = "Wear snow boots" 
       } else if (weatherID ==800){
         recommendationEl.textContent = "Wear sunscreen"
+      } else if (weatherID ==711){
+        recommendationEl.textContent = "Stay away!"
+      } else if (weatherID ==731){
+        recommendationEl.textContent = "Stay away!"
+      } else if (weatherID ==751){
+        recommendationEl.textContent = "Stay away!"
+      } else if (weatherID ==761){
+        recommendationEl.textContent = "Stay away!"
+      } else if (weatherID ==762){
+        recommendationEl.textContent = "Stay away!"
+      } else if (weatherID ==771){
+        recommendationEl.textContent = "Stay away!"
+      } else if (weatherID ==781){
+        recommendationEl.textContent = "Stay away!"
+      } else if (weatherID ==741){
+        recommendationEl.textContent = "visibility is poor"
       } else{
         recommendationEl.textContent = ""
       }
