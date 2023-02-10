@@ -99,7 +99,7 @@ fetch(parksUrl).then(function (response) {
           activitiesList.appendChild(newLiEl); // append the new activity li element to the list of activities
 
           if (localStorage.getItem(parkActivities[i].name) !== null && localStorage.getItem(parkActivities[i].name) === "true") {
-            
+            newCheckbox.checked = true;
           }
         }
 
