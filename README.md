@@ -20,16 +20,19 @@ N/A
 ## Installation
 
 ## Usage 
-![Screenshot] (./assets/images/screenshots/sc1.png/sc2/.....) - create assets images folder and link here
+
+![Screenshot](./assets/images/screenshots/landingpgsc.png) 
 <br>
+
+![Screenshot](./assets/images/screenshots/singleparksc.png) 
 
 ## Credits
 - Jacob Mulcahy
-    - [GitHub]()
+    - [GitHub](https://github.com/jmulcahy92)
 - Jack Kelly
-    - [GitHub]()
+    - [GitHub](https://github.com/Carnificis)
 - Irina Golovanich
-    - [Github]()
+    - [Github](https://github.com/irkag22)
 <br>
 
 ## License
@@ -39,7 +42,7 @@ Public.
 N/A
 
 ## Features
-**A Day in the Park** is:
+A Day in the Park is:
 - Mobile-Friendly
 - Designed with responsive UI
 <br> 
