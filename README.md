@@ -1,5 +1,6 @@
-# Day-in-the-Park
+# **Day-in-the-Park**
 <br>
+
 ## Description
 
 motivation
@@ -38,15 +39,13 @@ Public.
 N/A
 
 ## Features
-- mobile-first courtesy of Tailwind CSS
-- responsive UI
-- 
-
-
-
+**A Day in the Park** is:
+- Mobile-Friendly
+- Designed with responsive UI
 <br> 
 
-[GitHub] ()
+[GitHub](https://github.com/jmulcahy92/Day-in-the-Park)
 <br>
-[LiveLink] ()
+
+[LiveLink](https://jmulcahy92.github.io/Day-in-the-Park/)
 
