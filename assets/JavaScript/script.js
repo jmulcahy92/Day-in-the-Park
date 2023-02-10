@@ -70,10 +70,7 @@ var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + 
 <<<<<<< HEAD
 var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; //calls the open weather API for todays weather
 var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; //calls the open weather API for a five day forecast
-=======
-var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; // current weather api url
-var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; // forecast api url
->>>>>>> main
+>>>>>>>>> Temporary merge branch 2
 
 // store elements we want to add content to later
 var headerEl = document.querySelector(".header");
