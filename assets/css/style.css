@@ -26,7 +26,7 @@ color: aliceblue;
 font-family: 'Comfortaa', cursive;
 border-color: rgb(21, 49, 21);
 border-radius: 15px;
-/* margin-top: 5vh; */
+
 
 }
 
@@ -42,7 +42,7 @@ color:rgba(88, 4, 4, 0.582)
 
 #welcome {
 font-size: 45px;
-color: rgb(2, 30, 54);
+color: rgb(0, 10, 5);
 font-family: 'Comfortaa', cursive;
 margin-top: 90px;
 }
