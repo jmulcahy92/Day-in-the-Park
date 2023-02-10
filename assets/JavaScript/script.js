@@ -62,7 +62,7 @@ var parkCode = park.parkCode; // four-letter code for each park is necessary for
 var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=" + parksKey; // URL for parks API fetch with park-specific parkCode query
 
 var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
-var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=48.68414678&lon=-113.8009306&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
+var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial";
 
 var headerEl = document.querySelector(".header");
 var activitiesList = document.querySelector(".left").children[0].children[1].children[1];
@@ -210,10 +210,45 @@ fetch(parksUrl).then(function (response) {
   }
 });
 
+//var parkWeather = parkData.weatherInfo
+//var parkFiveDayWeather = parkData.FiveDayWeatherInfo
+
 fetch(weatherUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
+      
+      var parkTemp = data.main.temp; 
+      var tempEl = document.querySelector("#current-weather").children[0];
+      tempEl.textContent = "Temperature: "+ parkTemp + "°F";
+        
+      var parkFeels_like = data.main.feels_like
+      var feelsEl = document.querySelector("#current-weather").children[1];
+      feelsEl.textContent = "Feels Like: "+ parkFeels_like + "°F"
+        
+      var parkTemp_min = data.main.temp_min
+      var temp_minEl = document.querySelector("#current-weather").children[2];
+      temp_minEl.textContent = "Low: "+ parkTemp_min + "°F"
+        
+      var parkTemp_max = data.main.temp_max
+      var temp_maxEl = document.querySelector("#current-weather").children[3];
+      temp_maxEl.textContent = "High: "+ parkTemp_max + "°F"
+        
+      var weather = data.weather[0].main
+      var weatherEl = document.querySelector("#current-weather").children[4];
+      weatherEl.textContent = "Current weather: "+ weather
+        
+      var weatherID = data.weather[0].id
+      var recommendationEl = document.querySelector("#current-weather").children[5];
+      if(weatherID <600){
+        recommendationEl.textContent = "Bring an umbrella"
+      } else if (weatherID <700){
+        recommendationEl.textContent = "Wear snow boots" 
+      } else if (weatherID ==800){
+        recommendationEl.textContent = "Wear sunscreen"
+      } else{
+        recommendationEl.textContent = ""
+      }
     });
   }
 });
@@ -222,6 +257,31 @@ fetch(weatherFiveDayUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
       console.log(data);
+      var forecastData = data.list; // common path to all data we want
+
+      for (let index = 7; index < forecastData.length; index+=8) {
+        var specificforecast = forecastData[index];
+        var parkTemp = specificforecast.main.temp; 
+        var tempEl = document.querySelector("#current-weather").children[0];
+        tempEl.textContent = "temperature: "+ parkTemp + "F";
+        
+        var parkFeels_like = specificforecast.main.feels_like
+        var feelsEl = document.querySelector("#current-weather").children[1];
+        feelsEl.textContent = parkFeels_like
+        
+        var parkTemp_min = specificforecast.main.temp_min
+        var temp_minEl = document.querySelector("#current-weather").children[2];
+        temp_minEl.textContent = parkTemp_min
+        
+        var parkTemp_max = specificforecast.main.temp_max
+        var temp_maxEl = document.querySelector("#current-weather").children[3];
+        temp_maxEl.textContent = parkTemp_max
+      }
+      
+      // var parkFiveDayWeather = parkData.FiveDayWeather ; full name in a string
+      // var titleEl = document.createElement("");
+      // titleEl.textContent = parkName;
+      // headerEl.appendChild(titleEl);
     });
   }
 });
