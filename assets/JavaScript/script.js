@@ -186,7 +186,6 @@ fetch(parksUrl).then(function (response) {
           mainHours.appendChild(breakEl);
         }
 
-
         var parkClimate = parkData.weatherInfo; // string broadly describing standard temp ranges for every season
         // create/append into weather column (right)
 
@@ -195,28 +194,19 @@ fetch(parksUrl).then(function (response) {
         var addressEl = document.querySelector(".footerLinks").children[3];
         addressEl.textContent ="Address: "+parkAddress[0].line1+", "+parkAddress[0].line2+", "+parkAddress[0].city+", "+parkAddress[0].stateCode+" "+parkAddress[0].postalCode;
 
-        // create/append park address[]
         var parkPhone = parkData.contacts.phoneNumbers;
         var phoneEl = document.querySelector(".footerLinks").children[2];
         phoneEl.textContent="Phone: "+parkPhone[0].phoneNumber
 
-        // create/append phone number
         var parkEmail = parkData.contacts.emailAddresses;
         var emailEl = document.querySelector(".footerLinks").children[1];
         emailEl.textContent="Email: "+parkEmail[0].emailAddress
 
-        // create/append park email
         var parkURL = parkData.url;
         var urlEl = document.querySelector(".footerLinks").children[0].children[0];
         urlEl.setAttribute("href", parkURL)
-        // create/append park website
         
         console.log(parkClimate);
-
-        console.log(parkAddress);
-        console.log(parkPhone);
-        console.log(parkEmail);
-        console.log(parkURL);
     });
   }
 });
@@ -227,8 +217,6 @@ fetch(parksUrl).then(function (response) {
 fetch(weatherUrl).then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
-      console.log(data);
-      
       var parkTemp = data.main.temp; 
       var tempEl = document.querySelector("#current-weather").children[0];
       tempEl.textContent = "Temperature: "+ parkTemp + "°F";
@@ -271,22 +259,22 @@ fetch(weatherFiveDayUrl).then(function (response) {
       var forecastData = data.list; // common path to all data we want
 
       for (let index = 7; index < forecastData.length; index+=8) {
-        var specificforecast = forecastData[index];
-        var parkTemp = specificforecast.main.temp; 
-        var tempEl = document.querySelector("#current-weather").children[0];
-        tempEl.textContent = "temperature: "+ parkTemp + "F";
+        // var specificforecast = forecastData[index];
+        // var parkTemp = specificforecast.main.temp; 
+        // var tempEl = document.querySelector("#current-weather").children[0];
+        // tempEl.textContent = "temperature: "+ parkTemp + "F";
         
-        var parkFeels_like = specificforecast.main.feels_like
-        var feelsEl = document.querySelector("#current-weather").children[1];
-        feelsEl.textContent = parkFeels_like
+        // var parkFeels_like = specificforecast.main.feels_like
+        // var feelsEl = document.querySelector("#current-weather").children[1];
+        // feelsEl.textContent = parkFeels_like
         
-        var parkTemp_min = specificforecast.main.temp_min
-        var temp_minEl = document.querySelector("#current-weather").children[2];
-        temp_minEl.textContent = parkTemp_min
+        // var parkTemp_min = specificforecast.main.temp_min
+        // var temp_minEl = document.querySelector("#current-weather").children[2];
+        // temp_minEl.textContent = parkTemp_min
         
-        var parkTemp_max = specificforecast.main.temp_max
-        var temp_maxEl = document.querySelector("#current-weather").children[3];
-        temp_maxEl.textContent = parkTemp_max
+        // var parkTemp_max = specificforecast.main.temp_max
+        // var temp_maxEl = document.querySelector("#current-weather").children[3];
+        // temp_maxEl.textContent = parkTemp_max
       }
       
       // var parkFiveDayWeather = parkData.FiveDayWeather ; full name in a string
