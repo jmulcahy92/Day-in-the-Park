@@ -67,10 +67,10 @@ var parksKey = "KVZPIz8u4dvHQhj5wYQxDQUisHC1pnhaaCNJSTD9"; // parks API key
 var parkCode = park.parkCode; // four-letter code for each park is necessary for our parks API call
 var parksUrl =  "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=" + parksKey; // URL for parks API fetch with park-specific parkCode query
 
-<<<<<<< HEAD
+
 var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; //calls the open weather API for todays weather
 var weatherFiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + park.latitude + "&lon=" + park.longitude + "&appid=154e1be203e8485a4c5f54029425e084&units=imperial"; //calls the open weather API for a five day forecast
->>>>>>>>> Temporary merge branch 2
+
 
 // store elements we want to add content to later
 var headerEl = document.querySelector(".header");
